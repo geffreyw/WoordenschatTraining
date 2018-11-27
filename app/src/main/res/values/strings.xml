@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Woordenschat Training</string>
     <string name="action_settings">Settings</string>
+
+    <string name="voormetingsButton">Start voormeting</string>
+    <string name="title_activity_voormeting">VoormetingActivity</string>
 </resources>
