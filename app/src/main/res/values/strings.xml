@@ -4,4 +4,6 @@
 
     <string name="voormetingsButton">Start voormeting</string>
     <string name="title_activity_voormeting">VoormetingActivity</string>
+    <string name="title_activity_group">groupActivity</string>
+    <string name="title_activity_preteaching">PreteachingActivity</string>
 </resources>

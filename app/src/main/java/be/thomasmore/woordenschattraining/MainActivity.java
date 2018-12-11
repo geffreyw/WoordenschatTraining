@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toonVoormeting(View v) {
-        Intent intent = new Intent(this, VoormetingActivity.class);
+        Intent intent = new Intent(this, groupActivity.class);
         startActivity(intent);
     }
 }
