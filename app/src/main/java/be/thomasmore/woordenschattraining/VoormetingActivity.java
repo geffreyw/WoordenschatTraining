@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +20,10 @@ public class VoormetingActivity extends AppCompatActivity {
     int KOLOM = 2;
     int RIJ = 2;
     int AANTAL = RIJ * KOLOM;
+    int vraag = 0;
+
     ImageView fotos[] = new ImageView[AANTAL];
+    List<String> woorden = Arrays.asList("duikbril", "klimtouw", "kroos", "riet", "val", "kompas", "steil", "zwaan", "kamp", "zaklamp");
 
     List<String> filenames;
 
@@ -37,7 +41,7 @@ public class VoormetingActivity extends AppCompatActivity {
         filenames = new ArrayList<String>();
         Field[] drawables = be.thomasmore.woordenschattraining.R.drawable.class.getFields();
         for (Field f : drawables) {
-            if (f.getName().startsWith("logo_")) {
+            if (f.getName().startsWith("voormeting_")) {
                 filenames.add(f.getName());
             }
         }
@@ -46,6 +50,14 @@ public class VoormetingActivity extends AppCompatActivity {
 
     private void maakLayout()
     {
+        List<String> fotosVraag = new ArrayList<String>();
+
+        for (int i = 0; i < filenames.size(); i++){
+            if(filenames.get(i).contains(woorden.get(vraag))){
+                fotosVraag = filenames.subList(i, i + 4);
+            }
+        }
+        Collections.shuffle(fotosVraag);
         int k = 0;
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.layout_voormeting);
         for (int i = 0; i < RIJ; i++) {
@@ -64,21 +76,30 @@ public class VoormetingActivity extends AppCompatActivity {
                 imageLayoutParams.topMargin = 5;
                 imageView.setLayoutParams(imageLayoutParams);
 
-                imageView.setTag(filenames.get(k));
+                imageView.setTag(fotosVraag.get(k));
 
-                imageView.setImageResource(getResources().getIdentifier(filenames.get(k), "drawable", getPackageName()));
+                imageView.setImageResource(getResources().getIdentifier(fotosVraag.get(k), "drawable", getPackageName()));
 
-                /*imageView.setOnClickListener(new View.OnClickListener() {
+                imageView.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        toonVraag((ImageView)v);
+                        controlleerAntwoord((ImageView)v);
                     }
-                });*/
+                });
 
                 fotos[k] = imageView;
                 k++;
                 linearLayout.addView(imageView);
             }
         }
+    }
+
+    private void controlleerAntwoord(ImageView v){
+        vraag++;
+        if (vraag == filenames.size()){
+            vraag = 0;
+        }
+
+        maakLayout();
     }
 
 }
