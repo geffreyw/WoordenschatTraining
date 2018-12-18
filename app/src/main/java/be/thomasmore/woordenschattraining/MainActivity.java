@@ -10,12 +10,19 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = new DatabaseHelper(this);
+        readKinderen();
     }
 
     @Override
@@ -40,8 +47,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void readKinderen() {
+        final List<Kind> kinderen = db.getKinderen();
+
+    }
+
     public void toonVoormeting(View v) {
-        Intent intent = new Intent(this, groupActivity.class);
+        Intent intent = new Intent(this, VoormetingActivity.class);
+        startActivity(intent);
+    }
+
+    public void toonBeheren(View v) {
+        Intent intent = new Intent(this, BeherenActivity.class);
         startActivity(intent);
     }
 }

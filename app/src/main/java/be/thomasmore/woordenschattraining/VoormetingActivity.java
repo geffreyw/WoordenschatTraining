@@ -54,6 +54,7 @@ public class VoormetingActivity extends AppCompatActivity {
 
         for (int i = 0; i < filenames.size(); i++){
             if(filenames.get(i).contains(woorden.get(vraag))){
+                // todo fout wanneer 1+4 out of range gaat
                 fotosVraag = filenames.subList(i, i + 4);
             }
         }

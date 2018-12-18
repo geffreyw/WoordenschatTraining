@@ -33,6 +33,11 @@
         <activity
             android:name=".PreteachingActivity"
             android:label="@string/title_activity_preteaching"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BeherenActivity"
+            android:label="@string/title_activity_beheren"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
