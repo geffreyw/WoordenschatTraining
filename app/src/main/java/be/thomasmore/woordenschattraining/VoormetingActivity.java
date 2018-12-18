@@ -54,8 +54,10 @@ public class VoormetingActivity extends AppCompatActivity {
 
         for (int i = 0; i < filenames.size(); i++){
             if(filenames.get(i).contains(woorden.get(vraag))){
-                // todo fout wanneer 1+4 out of range gaat
-                fotosVraag = filenames.subList(i, i + 4);
+                List<String> tmpList = new ArrayList<String>(filenames);
+                tmpList.remove(i);
+                fotosVraag.add(filenames.get(i));
+                fotosVraag.addAll(tmpList.subList(0, 3));
             }
         }
         Collections.shuffle(fotosVraag);
