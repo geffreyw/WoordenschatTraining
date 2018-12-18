@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".BeherenActivity"
+    tools:showIn="@layout/activity_beheren">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/selectUserLabel"
+                android:textSize="15dp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <Button
+                android:id="@+id/button_newKind"
+                android:text="@string/nieuwButton"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="buttonNew_onClick"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inputGroep" />
+
+            <Spinner
+                android:id="@+id/allGroepenSpinner"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:drawSelectorOnTop="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kinderenBeherenListView" />
+
+            <ListView
+                android:id="@+id/kinderenListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="1dp" />
+
+        </LinearLayout>
+        <!-- Right side spacer -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/editUserLabel"
+                android:textSize="15dp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inputNaam" />
+
+            <EditText
+                android:id="@+id/naamEditText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inputGroep" />
+
+            <Spinner
+                android:id="@+id/groepSpinner"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:drawSelectorOnTop="true" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <Button
+                    android:id="@+id/button_voormeting"
+                    android:text="@string/opslaanButton"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="buttonUpdate_onClick"/>
+
+                <Button
+                    android:id="@+id/button_Beheren"
+                    android:text="@string/verwijderenButton"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="buttonDelete_onClick"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

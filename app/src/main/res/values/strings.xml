@@ -3,7 +3,18 @@
     <string name="action_settings">Settings</string>
 
     <string name="voormetingsButton">Start voormeting</string>
+    <string name="beherenButton">Gebruikers beheren</string>
+    <string name="kinderenBeherenListView">Kinderen:</string>
+    <string name="inputNaam">Naam:</string>
+    <string name="inputGroep">Groep:</string>
+    <string name="opslaanButton">Opslaan</string>
+    <string name="verwijderenButton">Verwijderen</string>
+    <string name="nieuwButton">Nieuw</string>
+    <string name="editUserLabel">Gebruiker aanpassen</string>
+    <string name="selectUserLabel">Gebruiker selecteren</string>
+
     <string name="title_activity_voormeting">VoormetingActivity</string>
     <string name="title_activity_group">groupActivity</string>
     <string name="title_activity_preteaching">PreteachingActivity</string>
+    <string name="title_activity_beheren">BeherenActivity</string>
 </resources>
