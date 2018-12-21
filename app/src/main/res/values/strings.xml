@@ -17,4 +17,5 @@
     <string name="title_activity_group">groupActivity</string>
     <string name="title_activity_preteaching">PreteachingActivity</string>
     <string name="title_activity_beheren">BeherenActivity</string>
+    <string name="title_activity_conditie">conditie</string>
 </resources>

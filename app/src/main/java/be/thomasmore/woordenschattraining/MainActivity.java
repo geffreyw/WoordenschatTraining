@@ -9,6 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -16,13 +21,28 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
 
+    private List<Kind> kinderen;
+
+    private List<Groep> groepen;
+
+    private Kind kind;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         db = new DatabaseHelper(this);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
         readKinderen();
+        readGroepen();
+        toonKinderen();
+        toonGroepen();
     }
 
     @Override
@@ -48,11 +68,69 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void readKinderen() {
-        final List<Kind> kinderen = db.getKinderen();
+        kinderen = db.getKinderen();
+    }
 
+    private void readGroepen() {
+        groepen = db.getGroepen();
+    }
+
+    private void toonKinderen() {
+        ArrayAdapter<Kind> adapter =
+                new ArrayAdapter<Kind>(this,
+                        android.R.layout.simple_list_item_1, kinderen);
+
+        final ListView listViewKinderen =
+                (ListView) findViewById(R.id.kinderenListView);
+        listViewKinderen.setAdapter(adapter);
+
+        listViewKinderen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parentView, View childView, int position, long id) {
+                kind = kinderen.get(position);
+            }
+        });
+    }
+
+    private void toonGroepen() {
+        ArrayAdapter<Groep> adapter =
+                new ArrayAdapter<Groep>(this,
+                        android.R.layout.simple_list_item_1, groepen);
+
+        Spinner spinnerAllGroepen =
+                (Spinner) findViewById(R.id.allGroepenSpinner);
+
+        spinnerAllGroepen.setAdapter(adapter);
+
+        spinnerAllGroepen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if(parentView.getId() == R.id.allGroepenSpinner){
+                    filterKinderen(selectedItemView);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    public void filterKinderen(View V) {
+        Spinner spinner = (Spinner) findViewById(R.id.allGroepenSpinner);
+        Groep groep = (Groep) spinner.getSelectedItem();
+        kinderen = db.getKinderenByGroep(groep.getId());
+        toonKinderen();
     }
 
     public void toonVoormeting(View v) {
+        // TODO geffrey: kind doorgeven naar voormeting
+        //Toast.makeText(getBaseContext(), kind.getNaam(), Toast.LENGTH_SHORT).show();
+
+        /*Bundle bundle = new Bundle();
+        bundle.putLong("id", kind.getId());*/
+
         Intent intent = new Intent(this, VoormetingActivity.class);
         startActivity(intent);
     }

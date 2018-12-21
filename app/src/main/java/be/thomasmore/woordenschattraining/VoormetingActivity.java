@@ -1,26 +1,33 @@
 package be.thomasmore.woordenschattraining;
 
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class VoormetingActivity extends AppCompatActivity {
     int KOLOM = 2;
     int RIJ = 2;
     int AANTAL = RIJ * KOLOM;
     int vraag = 0;
+    int score = 0;
 
     ImageView fotos[] = new ImageView[AANTAL];
     List<String> woorden = Arrays.asList("duikbril", "klimtouw", "kroos", "riet", "val", "kompas", "steil", "zwaan", "kamp", "zaklamp");
@@ -32,8 +39,8 @@ public class VoormetingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voormeting);
 
-        leesFotos();
-        maakLayout();
+        /*Bundle bundle = getIntent().getExtras();
+        toon(bundle.getLong("id") + "");*/
     }
 
     private void leesFotos()
@@ -45,12 +52,12 @@ public class VoormetingActivity extends AppCompatActivity {
                 filenames.add(f.getName());
             }
         }
-        Collections.shuffle(filenames);
     }
 
     private void maakLayout()
     {
         List<String> fotosVraag = new ArrayList<String>();
+        Collections.shuffle(filenames);
 
         for (int i = 0; i < filenames.size(); i++){
             if(filenames.get(i).contains(woorden.get(vraag))){
@@ -63,6 +70,7 @@ public class VoormetingActivity extends AppCompatActivity {
         Collections.shuffle(fotosVraag);
         int k = 0;
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.layout_voormeting);
+        mainLayout.removeAllViews();
         for (int i = 0; i < RIJ; i++) {
             LinearLayout linearLayout = new LinearLayout(this);
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -74,7 +82,7 @@ public class VoormetingActivity extends AppCompatActivity {
                 ImageView imageView = new ImageView(this);
 
                 LinearLayout.LayoutParams imageLayoutParams =
-                        new LinearLayout.LayoutParams(300,300);
+                        new LinearLayout.LayoutParams(600,500);
                 imageLayoutParams.leftMargin = 5;
                 imageLayoutParams.topMargin = 5;
                 imageView.setLayoutParams(imageLayoutParams);
@@ -94,15 +102,28 @@ public class VoormetingActivity extends AppCompatActivity {
                 linearLayout.addView(imageView);
             }
         }
+        MediaPlayer ring= MediaPlayer.create(VoormetingActivity.this, getResources().getIdentifier(woorden.get(vraag), "raw", getPackageName()));
+        ring.start();
     }
 
     private void controlleerAntwoord(ImageView v){
-        vraag++;
-        if (vraag == filenames.size()){
-            vraag = 0;
+        String antwoord = v.getTag().toString();
+        if(antwoord.contains(woorden.get(vraag))){
+            score++;
         }
+        vraag++;
+        if (vraag >= filenames.size()){
+            Intent intent = new Intent(this, ConditieActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            maakLayout();
+        }
+    }
 
-        maakLayout();
+    private void toon(String tekst)
+    {
+        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
 
 }
