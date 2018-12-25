@@ -131,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
         /*Bundle bundle = new Bundle();
         bundle.putLong("id", kind.getId());*/
 
-        Intent intent = new Intent(this, VoormetingActivity.class);
+        // TODO Kim: Terugzetten naar VoormetingActivity ipv preteachingactivity
+        Intent intent = new Intent(this, PreteachingActivity.class);
         startActivity(intent);
     }
 

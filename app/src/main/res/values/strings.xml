@@ -18,4 +18,6 @@
     <string name="title_activity_preteaching">PreteachingActivity</string>
     <string name="title_activity_beheren">BeherenActivity</string>
     <string name="title_activity_conditie">conditie</string>
+    <string name="title_activity_oef1">oef1Activity</string>
+    <string name="title_activity_oef2">oef2Activity</string>
 </resources>
