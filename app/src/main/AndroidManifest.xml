@@ -50,6 +50,16 @@
             android:name=".ConditieActivity"
             android:label="@string/title_activity_conditie"
             android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".oef1Activity"
+            android:label="@string/title_activity_oef1"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".oef2Activity"
+            android:label="@string/title_activity_oef2"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
