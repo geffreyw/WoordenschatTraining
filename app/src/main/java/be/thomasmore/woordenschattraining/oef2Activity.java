@@ -67,15 +67,15 @@ public class oef2Activity extends AppCompatActivity {
     public void volgendWoord(View v){
         i++;
         if(i == 4){
-            startOef2();
+            startOef3();
         }
         else {
             toonFoto();
         }
     }
 
-    public void startOef2(){
-        Intent intent = new Intent(this, oef2Activity.class);
+    public void startOef3(){
+        Intent intent = new Intent(this, oef3Activity.class);
         startActivity(intent);
     }
 
