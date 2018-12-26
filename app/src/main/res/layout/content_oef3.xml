@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".oef3Activity"
+    tools:showIn="@layout/activity_oef3">
+
+    <LinearLayout
+        android:id="@+id/layout_oef1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/groeneDuim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="50px"
+            android:onClick="controleerAntwoord"
+            android:src="@drawable/groene_duim"
+            android:tag="goed" />
+
+        <ImageView
+            android:id="@+id/luidspreker"
+            android:layout_width="151dp"
+            android:layout_height="match_parent"
+            android:onClick="herhaalZin"
+            android:src="@drawable/luidspreker" />
+
+        <ImageView
+            android:id="@+id/rodeDuim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="50px"
+            android:onClick="controleerAntwoord"
+            android:src="@drawable/rode_duim"
+            android:tag="fout" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/kaat"
+        android:layout_width="245dp"
+        android:layout_height="226dp"
+        android:src="@drawable/kaat"
+        tools:ignore="MissingConstraints" />
+</android.support.constraint.ConstraintLayout>
