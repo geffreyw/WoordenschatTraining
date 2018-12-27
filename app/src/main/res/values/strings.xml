@@ -2,16 +2,24 @@
     <string name="app_name">Woordenschat Training</string>
     <string name="action_settings">Settings</string>
 
-    <string name="voormetingsButton">Start voormeting</string>
+    <string name="voormetingsButton">Start test</string>
     <string name="beherenButton">Gebruikers beheren</string>
     <string name="kinderenBeherenListView">Kinderen:</string>
     <string name="inputNaam">Naam:</string>
     <string name="inputGroep">Groep:</string>
     <string name="opslaanButton">Opslaan</string>
     <string name="verwijderenButton">Verwijderen</string>
+    <string name="verwijderTestenButton">Verwijder testen</string>
     <string name="nieuwButton">Nieuw</string>
     <string name="editUserLabel">Gebruiker aanpassen</string>
     <string name="selectUserLabel">Gebruiker selecteren</string>
+
+    <string name="selectConditie">Kies een conditie</string>
+    <string name="conditie1Button">1</string>
+    <string name="conditie2Button">2</string>
+    <string name="conditie3Button">3</string>
+
+    <string name="resultaatTitel">Resultaat van de test</string>
 
     <string name="title_activity_voormeting">VoormetingActivity</string>
     <string name="title_activity_group">groupActivity</string>
@@ -21,4 +29,5 @@
     <string name="title_activity_oef1">oef1Activity</string>
     <string name="title_activity_oef2">oef2Activity</string>
     <string name="title_activity_oef3">oef3Activity</string>
+    <string name="title_activity_resultaat">ResultaatActivity</string>
 </resources>

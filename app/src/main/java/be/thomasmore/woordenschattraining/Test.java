@@ -6,16 +6,16 @@ public class Test {
 
     private long id;
     private long kindId;
-    private int score;
+    private int conditie;
     private String datum;
 
     public Test() {
     }
 
-    public Test(long id, long kindId, int score, String datum) {
+    public Test(long id, long kindId, int conditie, String datum) {
         this.id = id;
         this.kindId = kindId;
-        this.score = score;
+        this.conditie = conditie;
         this.datum = datum;
     }
 
@@ -35,12 +35,12 @@ public class Test {
         this.kindId = kindId;
     }
 
-    public int getScore() {
-        return score;
+    public int getConditie() {
+        return conditie;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setConditie(int conditie) {
+        this.conditie = conditie;
     }
 
     public String getDatum() {
