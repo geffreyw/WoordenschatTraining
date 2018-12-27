@@ -38,6 +38,8 @@ public class VoormetingActivity extends AppCompatActivity {
 
     long testId;
 
+    String meeting;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class VoormetingActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         testId = (int)bundle.getLong("testId");
+        meeting = bundle.getString("meeting");
 
         leesFotos();
         maakLayout();
@@ -111,14 +114,14 @@ public class VoormetingActivity extends AppCompatActivity {
                 linearLayout.addView(imageView);
             }
         }
-        MediaPlayer ring= MediaPlayer.create(VoormetingActivity.this, getResources().getIdentifier("voormeting_"+woorden.get(vraag), "raw", getPackageName()));
+        MediaPlayer ring = MediaPlayer.create(VoormetingActivity.this, getResources().getIdentifier("voormeting_" + woorden.get(vraag), "raw", getPackageName()));
         ring.start();
     }
 
     private void controlleerAntwoord(ImageView v){
         String antwoord = v.getTag().toString();
         GetestWoord getestWoord = new GetestWoord();
-        getestWoord.setOefening("Voormeting");
+        getestWoord.setOefening(meeting);
         getestWoord.setTestId(testId);
         getestWoord.setWoord(woorden.get(vraag));
         getestWoord.setAntwoord(false);
@@ -132,6 +135,11 @@ public class VoormetingActivity extends AppCompatActivity {
             bundle.putLong("testId", testId);
 
             Intent intent = new Intent(this, ResultaatActivity.class);
+
+            if(meeting.equals("voormeting")){
+                intent = new Intent(this, PreteachingActivity.class);
+            }
+
             intent.putExtras(bundle);
             startActivity(intent);
             finish();

@@ -24,14 +24,23 @@ import java.util.List;
 
 public class oef1Activity extends AppCompatActivity {
 
+    private DatabaseHelper db;
+
     List<String> woorden = Arrays.asList("duikbril","klimtouw", "kroos", "riet");
 
     List<String> fotos;
     int i = 0;
+
+    Test test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef1);
+
+        db = new DatabaseHelper(this);
+
+        Bundle bundle = getIntent().getExtras();
+        test = db.getTest(bundle.getLong("testId"));
 
         leesFotos();
         toonFoto();
@@ -86,7 +95,6 @@ public class oef1Activity extends AppCompatActivity {
     }
 
     public void herhaalUitleg(View v){
-        MediaPlayer ring= MediaPlayer.create(oef1Activity.this, getResources().getIdentifier("uitleg_"+woorden.get(i), "raw", getPackageName()));
-        ring.start();
+        speelUitleg();
     }
 }
