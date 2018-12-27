@@ -12,7 +12,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 7;
     // Database Name
     private static final String DATABASE_NAME = "woordTraining";
 
@@ -44,10 +44,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String CREATE_TABLE_TEST = "CREATE TABLE test (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "kindId INTEGER," +
-                "score INTEGER, " +
+                "conditie INTEGER, " +
                 "datum TEXT," +
                 "FOREIGN KEY (kindId) REFERENCES kind(id))";
         db.execSQL(CREATE_TABLE_TEST);
+
+        String CREATE_TABLE_GETESTWOORD = "CREATE TABLE getestWoord (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "testId INTEGER," +
+                "oefening TEXT, " +
+                "woord TEXT," +
+                "antwoord BOOL," +
+                "FOREIGN KEY (testId) REFERENCES test(id))";
+        db.execSQL(CREATE_TABLE_GETESTWOORD);
 
         insertGroepen(db);
         insertKinderen(db);
@@ -69,8 +78,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     // hierin de vorige tabellen wegdoen en opnieuw creëren
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS kind");
+        db.execSQL("DROP TABLE IF EXISTS getestWoord");
         db.execSQL("DROP TABLE IF EXISTS test");
+        db.execSQL("DROP TABLE IF EXISTS kind");
         db.execSQL("DROP TABLE IF EXISTS groep");
 
         // Create tables again
@@ -90,6 +100,37 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         values.put("groepId", kind.getGroepId());
 
         long id = db.insert("kind", null, values);
+
+        db.close();
+        return id;
+    }
+
+    // insert-methode met ContentValues
+    public long insertTest(Test test) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("kindId", test.getKindId());
+        values.put("conditie", test.getConditie());
+        values.put("datum", test.getDatum());
+
+        long id = db.insert("test", null, values);
+
+        db.close();
+        return id;
+    }
+
+    // insert-methode met ContentValues
+    public long insertGetestWoord(GetestWoord woord) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("testId", woord.getTestId());
+        values.put("oefening", woord.getOefening());
+        values.put("woord", woord.getWoord());
+        values.put("antwoord", woord.getAntwoord());
+
+        long id = db.insert("getestWoord", null, values);
 
         db.close();
         return id;
@@ -126,6 +167,21 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return numrows > 0;
     }
 
+    // delete-methode
+    public boolean deleteTesten() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int numrows = 0;
+
+        if (db.delete("getestWoord", "1", null) == 0){
+            numrows = db.delete(
+                    "test", "1", null);
+        }
+
+        db.close();
+        return numrows > 0;
+    }
+
     // query-methode
     public Kind getKind(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -149,6 +205,31 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         cursor.close();
         db.close();
         return kind;
+    }
+
+    // query-methode
+    public Test getTest(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "test",      // tabelnaam
+                new String[] { "id", "kindId", "conditie", "datum" }, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Test test = new Test();
+
+        if (cursor.moveToFirst()) {
+            test = new Test(cursor.getLong(0),
+                    cursor.getLong(1), cursor.getInt(2), cursor.getString(3));
+        }
+        cursor.close();
+        db.close();
+        return test;
     }
 
     // rawQuery-methode
@@ -201,10 +282,37 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     // rawQuery-methode
+    public List<GetestWoord> getGetesteWoordFromTest(long testId) {
+        List<GetestWoord> lijst = new ArrayList<GetestWoord>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                "getestWoord",      // tabelnaam
+                new String[] { "id", "testId", "oefening", "woord", "antwoord" }, // kolommen
+                "testId = ?",  // selectie
+                new String[] { String.valueOf(testId) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+        if (cursor.moveToFirst()) {
+            do {
+                GetestWoord getestWoord = new GetestWoord(cursor.getLong(0),
+                        cursor.getLong(1), cursor.getString(2), cursor.getString(3), (cursor.getInt(4) != 0));
+                lijst.add(getestWoord);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
+
+    // rawQuery-methode
     public List<Test> getTesten() {
         List<Test> lijst = new ArrayList<Test>();
 
-        String selectQuery = "SELECT  * FROM test ORDER BY datum";
+        String selectQuery = "SELECT  * FROM test";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class VoormetingActivity extends AppCompatActivity {
+    private DatabaseHelper db;
+
     int KOLOM = 2;
     int RIJ = 2;
     int AANTAL = RIJ * KOLOM;
@@ -34,13 +36,20 @@ public class VoormetingActivity extends AppCompatActivity {
 
     List<String> filenames;
 
+    long testId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voormeting);
 
-        /*Bundle bundle = getIntent().getExtras();
-        toon(bundle.getLong("id") + "");*/
+        db = new DatabaseHelper(this);
+
+        Bundle bundle = getIntent().getExtras();
+        testId = (int)bundle.getLong("testId");
+
+        leesFotos();
+        maakLayout();
     }
 
     private void leesFotos()
@@ -102,18 +111,28 @@ public class VoormetingActivity extends AppCompatActivity {
                 linearLayout.addView(imageView);
             }
         }
-        MediaPlayer ring= MediaPlayer.create(VoormetingActivity.this, getResources().getIdentifier(woorden.get(vraag), "raw", getPackageName()));
+        MediaPlayer ring= MediaPlayer.create(VoormetingActivity.this, getResources().getIdentifier("voormeting_"+woorden.get(vraag), "raw", getPackageName()));
         ring.start();
     }
 
     private void controlleerAntwoord(ImageView v){
         String antwoord = v.getTag().toString();
-        if(antwoord.contains(woorden.get(vraag))){
-            score++;
+        GetestWoord getestWoord = new GetestWoord();
+        getestWoord.setOefening("Voormeting");
+        getestWoord.setTestId(testId);
+        getestWoord.setWoord(woorden.get(vraag));
+        getestWoord.setAntwoord(false);
+        if(antwoord.contains(getestWoord.getWoord())){
+            getestWoord.setAntwoord(true);
         }
+        db.insertGetestWoord(getestWoord);
         vraag++;
         if (vraag >= filenames.size()){
-            Intent intent = new Intent(this, ConditieActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("testId", testId);
+
+            Intent intent = new Intent(this, ResultaatActivity.class);
+            intent.putExtras(bundle);
             startActivity(intent);
             finish();
         } else {

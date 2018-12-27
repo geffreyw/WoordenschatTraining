@@ -100,7 +100,7 @@ public class BeherenActivity extends AppCompatActivity {
         spinnerAllGroepen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if(parentView.getId() == R.id.allGroepenSpinner){
+                if (parentView.getId() == R.id.allGroepenSpinner) {
                     filterKinderen(selectedItemView);
                 }
             }
@@ -119,7 +119,7 @@ public class BeherenActivity extends AppCompatActivity {
         toonKinderen();
     }
 
-    public void buttonUpdate_onClick(View v){
+    public void buttonUpdate_onClick(View v) {
         Kind editKind = kind;
 
         EditText naamEditText = (EditText) findViewById(R.id.naamEditText);
@@ -129,7 +129,7 @@ public class BeherenActivity extends AppCompatActivity {
         Groep groep = (Groep) spinner.getSelectedItem();
         editKind.setGroepId(groep.getId());
 
-        if (editKind.getId() == 0){
+        if (editKind.getId() == 0) {
             db.insertKind(editKind);
         } else {
             db.updateKind(editKind);
@@ -142,12 +142,12 @@ public class BeherenActivity extends AppCompatActivity {
         toon(editKind.getNaam() + " aangepast");
     }
 
-    public void buttonNew_onClick(View v){
+    public void buttonNew_onClick(View v) {
         toonKind(new Kind());
     }
 
-    public void buttonDelete_onClick(View v){
-        if(kind.getId() != 0){
+    public void buttonDelete_onClick(View v) {
+        if (kind.getId() != 0) {
             db.deleteKind(kind.getId());
             readKinderen();
             toonKinderen();
@@ -157,8 +157,16 @@ public class BeherenActivity extends AppCompatActivity {
         }
     }
 
-    private void toon(String tekst)
-    {
+    public void buttonDeleteTesten_onClick(View v) {
+        if (db.deleteTesten()){
+            toon("Testen verwijderd!");
+        }
+        else {
+            toon("Error!");
+        }
+    }
+
+    private void toon(String tekst) {
         Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
 }
