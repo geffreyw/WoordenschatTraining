@@ -14,6 +14,8 @@ public class PreteachingActivity extends AppCompatActivity {
 
     long testId;
 
+    MediaPlayer ring;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +26,7 @@ public class PreteachingActivity extends AppCompatActivity {
 
         new CountDownTimer(1000, 1000) {
             public void onFinish() {
-                MediaPlayer ring = MediaPlayer.create(PreteachingActivity.this, getResources().getIdentifier("preteachingplaat", "raw", getPackageName()));
+                ring = MediaPlayer.create(PreteachingActivity.this, getResources().getIdentifier("preteachingplaat", "raw", getPackageName()));
                 ring.start();
             }
             public void onTick(long millisUntilFinished) {
@@ -34,6 +36,7 @@ public class PreteachingActivity extends AppCompatActivity {
     }
 
     public void bomen_onClick(View v){
+        ring.stop();
         Bundle bundle = new Bundle();
         bundle.putLong("testId", testId);
         bundle.putInt("vraag", 0);

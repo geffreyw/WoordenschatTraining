@@ -18,69 +18,97 @@ import java.util.List;
 
 public class oef2Activity extends AppCompatActivity {
 
-    List<String> woorden = Arrays.asList("duikbril","klimtouw", "kroos", "riet");
-    List<String> fotos;
+    private DatabaseHelper db;
+
+    List<String> woordenA = Arrays.asList("klimtouw", "kroos", "riet");
+    List<String> woordenB = Arrays.asList("val", "kompas", "steil");
+    List<String> woordenC = Arrays.asList("zwaan", "kamp", "zaklamp");
+
+    String woord = "duikbril";
+
+    List[][] mtrx = new List[][]{
+            {woordenA, woordenB, woordenC},
+            {woordenC, woordenA, woordenB},
+            {woordenB, woordenC, woordenA},
+    };
+
+    int vraag;
+
+    String foto;
+
+    Test test;
+
     int i = 0;
+
+    MediaPlayer ring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef2);
 
-        leesFotos();
+        db = new DatabaseHelper(this);
+
+        Bundle bundle = getIntent().getExtras();
+        test = db.getTest(bundle.getLong("testId"));
+
+        Kind kind = db.getKind(test.getKindId());
+
+        vraag = bundle.getInt("vraag");
+
+        int x = test.getConditie() - 1;
+        int y = (int) kind.getGroepId() - 1;
+
+        if (vraag != 0){
+            woord = ((List<String>) mtrx[y][x]).get(vraag-1);
+        }
+
+        leesFoto();
         toonFoto();
     }
 
-    private void leesFotos() {
-        fotos = new ArrayList<String>();
+    private void leesFoto() {
+        foto = "";
 
         Field[] drawables = be.thomasmore.woordenschattraining.R.drawable.class.getFields();
         for (Field f : drawables) {
-            if (f.getName().startsWith("voormeting_"+ woorden.get(i))) {
-                fotos.add(f.getName());
-                i++;
-                if(i==4){
-                    i=0;
-                }
+            if (f.getName().startsWith("voormeting_"+ woord)) {
+                foto = f.getName();
             }
         }
     }
 
     public void toonFoto() {
-        TextView woord = (TextView) findViewById(R.id.woord);
-        woord.setText(woorden.get(i).toUpperCase());
+        TextView woordTextView = (TextView) findViewById(R.id.woord);
+        woordTextView.setText(woord.toUpperCase());
 
 
         ImageView image = (ImageView) findViewById(R.id.afbeelding);
-        image.setImageResource(getResources().getIdentifier(fotos.get(i), "drawable", getPackageName()));
+        image.setImageResource(getResources().getIdentifier(foto, "drawable", getPackageName()));
 
         speelUitleg();
 
     }
 
     public void speelUitleg(){
-        MediaPlayer ring= MediaPlayer.create(oef2Activity.this, getResources().getIdentifier("oef2_"+woorden.get(i), "raw", getPackageName()));
+        ring = MediaPlayer.create(oef2Activity.this, getResources().getIdentifier("oef2_"+woord, "raw", getPackageName()));
         ring.start();
 
     }
 
     public void volgendWoord(View v){
-        i++;
-        if(i == 4){
-            startOef3();
-        }
-        else {
-            toonFoto();
-        }
-    }
-
-    public void startOef3(){
-        Intent intent = new Intent(this, oef3Activity.class);
+        ring.stop();
+        Bundle bundle = new Bundle();
+        bundle.putLong("testId", test.getId());
+        bundle.putInt("vraag", vraag+1);
+        // todo geffrey: aanpassen naar oef 3
+        Intent intent = new Intent(this, oef1Activity.class);
+        intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 
     public void herhaalUitleg(View v){
-        MediaPlayer ring= MediaPlayer.create(oef2Activity.this, getResources().getIdentifier("uitleg_"+woorden.get(i), "raw", getPackageName()));
-        ring.start();
+        speelUitleg();
     }
 }

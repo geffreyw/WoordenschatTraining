@@ -40,6 +40,8 @@ public class VoormetingActivity extends AppCompatActivity {
 
     String meeting;
 
+    MediaPlayer ring;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,11 +116,12 @@ public class VoormetingActivity extends AppCompatActivity {
                 linearLayout.addView(imageView);
             }
         }
-        MediaPlayer ring = MediaPlayer.create(VoormetingActivity.this, getResources().getIdentifier("voormeting_" + woorden.get(vraag), "raw", getPackageName()));
+        ring = MediaPlayer.create(VoormetingActivity.this, getResources().getIdentifier("voormeting_" + woorden.get(vraag), "raw", getPackageName()));
         ring.start();
     }
 
     private void controlleerAntwoord(ImageView v){
+        ring.stop();
         String antwoord = v.getTag().toString();
         GetestWoord getestWoord = new GetestWoord();
         getestWoord.setOefening(meeting);
