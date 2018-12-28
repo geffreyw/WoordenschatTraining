@@ -23,7 +23,7 @@ public class Oef3Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef3);
 
-//        speelUitleg();
+        speelUitleg();
         speelZin();
     }
 
