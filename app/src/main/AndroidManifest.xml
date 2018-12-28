@@ -32,7 +32,7 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".groupActivity"
+            android:name=".GroupActivity"
             android:label="@string/title_activity_group"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -52,21 +52,32 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".oef1Activity"
+            android:name=".Oef1Activity"
             android:label="@string/title_activity_oef1"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".oef2Activity"
+            android:name=".Oef2Activity"
             android:label="@string/title_activity_oef2"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".oef3Activity"
+            android:name=".Oef3Activity"
             android:label="@string/title_activity_oef3"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".Oef4Activity"
+            android:label="@string/title_activity_oef4"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Oef6Activity"
+            android:label="@string/title_activity_oef6"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+                  
+        <activity      
             android:name=".ResultaatActivity"
             android:label="@string/title_activity_resultaat"
             android:screenOrientation="landscape"
