@@ -3,10 +3,7 @@ package be.thomasmore.woordenschattraining;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class oef2Activity extends AppCompatActivity {
+public class Oef2Activity extends AppCompatActivity {
 
     private DatabaseHelper db;
 
@@ -91,7 +88,7 @@ public class oef2Activity extends AppCompatActivity {
     }
 
     public void speelUitleg(){
-        ring = MediaPlayer.create(oef2Activity.this, getResources().getIdentifier("oef2_"+woord, "raw", getPackageName()));
+        ring = MediaPlayer.create(Oef2Activity.this, getResources().getIdentifier("oef2_"+woord, "raw", getPackageName()));
         ring.start();
 
     }
@@ -102,7 +99,7 @@ public class oef2Activity extends AppCompatActivity {
         bundle.putLong("testId", test.getId());
         bundle.putInt("vraag", vraag+1);
         // todo geffrey: aanpassen naar oef 3
-        Intent intent = new Intent(this, oef1Activity.class);
+        Intent intent = new Intent(this, Oef1Activity.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
