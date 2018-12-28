@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putLong("id", kind.getId());
 
-            Intent intent = new Intent(this, ConditieActivity.class);
+            Intent intent = new Intent(this, Oef6_2Activity.class);
             intent.putExtras(bundle);
             startActivity(intent);
             kind = null;
@@ -141,6 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void toon(String tekst)
     {
-        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
 }

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Oef6Activity">
-    
-    <include layout="@layout/content_oef6" />
+    tools:context=".Oef6_2Activity">
+
+    <include layout="@layout/content_oef6_2" />
 
 </android.support.design.widget.CoordinatorLayout>
