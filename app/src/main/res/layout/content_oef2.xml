@@ -41,6 +41,7 @@
         android:layout_width="245dp"
         android:layout_height="226dp"
         android:src="@drawable/kaat"
+        android:onClick="herhaalUitleg"
         tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

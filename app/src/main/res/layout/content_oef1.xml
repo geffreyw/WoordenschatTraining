@@ -42,7 +42,7 @@
         android:id="@+id/kaat"
         android:layout_width="245dp"
         android:layout_height="226dp"
-        android:onClick="volgendWoord"
+        android:onClick="herhaalUitleg"
         android:src="@drawable/kaat"
         tools:ignore="MissingConstraints" />
 
