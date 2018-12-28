@@ -75,6 +75,12 @@
             android:name=".Oef6Activity"
             android:label="@string/title_activity_oef6"
             android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+                  
+        <activity      
+            android:name=".ResultaatActivity"
+            android:label="@string/title_activity_resultaat"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

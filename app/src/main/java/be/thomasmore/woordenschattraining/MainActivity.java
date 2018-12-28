@@ -121,19 +121,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void toonVoormeting(View v) {
-        // TODO geffrey: kind doorgeven naar voormeting
-        //Toast.makeText(getBaseContext(), kind.getNaam(), Toast.LENGTH_SHORT).show();
+        if (kind != null){
+            Bundle bundle = new Bundle();
+            bundle.putLong("id", kind.getId());
 
-        /*Bundle bundle = new Bundle();
-        bundle.putLong("id", kind.getId());*/
-
-        // TODO Kim: Terugzetten naar VoormetingActivity ipv preteachingactivity
-        Intent intent = new Intent(this, Oef4Activity.class);
-        startActivity(intent);
+            Intent intent = new Intent(this, ConditieActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            kind = null;
+        } else {
+            toon("Selecteer een kind!");
+        }
     }
 
     public void toonBeheren(View v) {
         Intent intent = new Intent(this, BeherenActivity.class);
         startActivity(intent);
+    }
+
+    private void toon(String tekst)
+    {
+        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
 }
