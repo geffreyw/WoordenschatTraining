@@ -21,4 +21,6 @@
     <string name="title_activity_oef1">oef1Activity</string>
     <string name="title_activity_oef2">oef2Activity</string>
     <string name="title_activity_oef3">oef3Activity</string>
+    <string name="title_activity_oef4">Oef4Activity</string>
+    <string name="title_activity_oef6">Oef6Activity</string>
 </resources>

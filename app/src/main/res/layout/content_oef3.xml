@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".oef3Activity"
+    tools:context=".Oef3Activity"
     tools:showIn="@layout/activity_oef3">
 
     <LinearLayout
@@ -25,7 +25,7 @@
             android:layout_marginRight="50px"
             android:onClick="controleerAntwoord"
             android:src="@drawable/groene_duim"
-            android:tag="goed" />
+            android:tag="_goed" />
 
         <ImageView
             android:id="@+id/luidspreker"
@@ -41,7 +41,7 @@
             android:layout_marginLeft="50px"
             android:onClick="controleerAntwoord"
             android:src="@drawable/rode_duim"
-            android:tag="fout" />
+            android:tag="_fout" />
 
     </LinearLayout>
 

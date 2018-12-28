@@ -3,10 +3,7 @@ package be.thomasmore.woordenschattraining;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,16 +13,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class oef2Activity extends AppCompatActivity {
+public class Oef1Activity extends AppCompatActivity {
 
     List<String> woorden = Arrays.asList("duikbril","klimtouw", "kroos", "riet");
+
     List<String> fotos;
     int i = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_oef2);
+        setContentView(R.layout.activity_oef1);
 
         leesFotos();
         toonFoto();
@@ -59,7 +56,7 @@ public class oef2Activity extends AppCompatActivity {
     }
 
     public void speelUitleg(){
-        MediaPlayer ring= MediaPlayer.create(oef2Activity.this, getResources().getIdentifier("oef2_"+woorden.get(i), "raw", getPackageName()));
+        MediaPlayer ring= MediaPlayer.create(Oef1Activity.this, getResources().getIdentifier("uitleg_"+woorden.get(i), "raw", getPackageName()));
         ring.start();
 
     }
@@ -67,20 +64,20 @@ public class oef2Activity extends AppCompatActivity {
     public void volgendWoord(View v){
         i++;
         if(i == 4){
-            startOef3();
+            startOef2();
         }
         else {
             toonFoto();
         }
     }
 
-    public void startOef3(){
-        Intent intent = new Intent(this, oef3Activity.class);
+    public void startOef2(){
+        Intent intent = new Intent(this, Oef2Activity.class);
         startActivity(intent);
     }
 
     public void herhaalUitleg(View v){
-        MediaPlayer ring= MediaPlayer.create(oef2Activity.this, getResources().getIdentifier("uitleg_"+woorden.get(i), "raw", getPackageName()));
+        MediaPlayer ring= MediaPlayer.create(Oef1Activity.this, getResources().getIdentifier("uitleg_"+woorden.get(i), "raw", getPackageName()));
         ring.start();
     }
 }
