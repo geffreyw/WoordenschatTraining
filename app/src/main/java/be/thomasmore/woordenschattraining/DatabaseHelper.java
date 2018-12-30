@@ -232,6 +232,31 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return test;
     }
 
+    // query-methode
+    public Groep getGroep(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "groep",      // tabelnaam
+                new String[] { "id", "naam"}, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Groep groep = new Groep();
+
+        if (cursor.moveToFirst()) {
+            groep = new Groep(cursor.getLong(0),
+                    cursor.getString(1));
+        }
+        cursor.close();
+        db.close();
+        return groep;
+    }
+
     // rawQuery-methode
     public List<Kind> getKinderen() {
         List<Kind> lijst = new ArrayList<Kind>();

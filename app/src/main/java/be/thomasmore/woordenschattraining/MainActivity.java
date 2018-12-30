@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -124,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
         if (kind != null){
             Bundle bundle = new Bundle();
             bundle.putLong("id", kind.getId());
-
-            Intent intent = new Intent(this, Oef6_3Activity.class);
+          
+            Intent intent = new Intent(this, ConditieActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
             kind = null;
