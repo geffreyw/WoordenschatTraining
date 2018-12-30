@@ -50,5 +50,6 @@
         android:layout_width="245dp"
         android:layout_height="226dp"
         android:src="@drawable/kaat"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:onClick="stopZin"/>
 </android.support.constraint.ConstraintLayout>
