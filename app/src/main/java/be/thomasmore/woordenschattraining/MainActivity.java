@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putLong("id", kind.getId());
 
-            Intent intent = new Intent(this, Oef6_2Activity.class);
+            Intent intent = new Intent(this, Oef6_3Activity.class);
             intent.putExtras(bundle);
             startActivity(intent);
             kind = null;
