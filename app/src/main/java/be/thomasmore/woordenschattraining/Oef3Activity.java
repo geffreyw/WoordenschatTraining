@@ -82,8 +82,14 @@ public class Oef3Activity extends AppCompatActivity {
 
     public void controleerAntwoord(View v) {
         String antwoord = v.getTag().toString();
+        GetestWoord getestWoord = new GetestWoord();
+        getestWoord.setOefening("Oef3");
+        getestWoord.setTestId(test.getId());
+        getestWoord.setWoord(woord + goedOfFout.get(i));
+        getestWoord.setAntwoord(false);
         String correcteAntwoord = goedOfFout.get(i);
         if (antwoord.equals(correcteAntwoord)){
+            getestWoord.setAntwoord(true);
             if (correcteAntwoord.equals("_goed")){
                 ring = MediaPlayer.create(Oef3Activity.this, getResources().getIdentifier("oef3_goed", "raw", getPackageName()));
                 ring.start();
@@ -109,6 +115,7 @@ public class Oef3Activity extends AppCompatActivity {
                 }
             });
         }
+        db.insertGetestWoord(getestWoord);
     }
 
     public void volgende(){
@@ -117,13 +124,24 @@ public class Oef3Activity extends AppCompatActivity {
             ring.stop();
             Bundle bundle = new Bundle();
             bundle.putLong("testId", test.getId());
-            bundle.putInt("vraag", vraag+1);
-            Intent intent = new Intent(this, Oef1Activity.class);
+            bundle.putInt("vraag", vraag);
+            Intent intent = new Intent();
+            //todo geffrey: activitys goed zetten
+            switch (test.getConditie()) {
+                case 1: intent = new Intent(this, Oef6_2Activity.class);
+                    break;
+                case 2: intent = new Intent(this, Oef6_2Activity.class);
+                    break;
+                case 3: intent = new Intent(this, Oef6_1Activity.class);
+                    break;
+            }
+
             intent.putExtras(bundle);
             startActivity(intent);
             finish();
         }
         else {
+            ring.stop();
             speelZin();
 
         }
@@ -131,5 +149,9 @@ public class Oef3Activity extends AppCompatActivity {
 
     public void herhaalZin(View view) {
         speelZin();
+    }
+
+    public void stopZin(View view) {
+        ring.stop();
     }
 }

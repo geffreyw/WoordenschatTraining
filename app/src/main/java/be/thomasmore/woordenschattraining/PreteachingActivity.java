@@ -11,7 +11,7 @@ public class PreteachingActivity extends AppCompatActivity {
 
     long testId;
 
-    MediaPlayer ring;
+    MediaPlayer ring = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class PreteachingActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         testId = (int)bundle.getLong("testId");
 
-        new CountDownTimer(1000, 1000) {
+        /*new CountDownTimer(1000, 1000) {
             public void onFinish() {
                 ring = MediaPlayer.create(PreteachingActivity.this, getResources().getIdentifier("preteachingplaat", "raw", getPackageName()));
                 ring.start();
@@ -29,7 +29,10 @@ public class PreteachingActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 // millisUntilFinished    The amount of time until finished.
             }
-        }.start();
+        }.start();*/
+
+        ring = MediaPlayer.create(PreteachingActivity.this, getResources().getIdentifier("preteachingplaat", "raw", getPackageName()));
+        ring.start();
     }
 
     public void bomen_onClick(View v){
