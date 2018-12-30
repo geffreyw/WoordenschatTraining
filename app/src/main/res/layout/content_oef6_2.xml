@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="test"
+            android:text="duikbril"
             android:onClick="herhaalZin"
             android:textAlignment="center"
             android:textSize="100px" />

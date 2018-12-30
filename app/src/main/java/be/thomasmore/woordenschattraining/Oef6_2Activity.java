@@ -1,5 +1,7 @@
 package be.thomasmore.woordenschattraining;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -23,10 +25,15 @@ public class Oef6_2Activity extends AppCompatActivity {
     MediaPlayer audio;
     List<String> fotos;
 
+    private ImageView imageView;
+    long animationDuration = 1000;
+    int lengte;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef6_2);
+        imageView = (ImageView) findViewById(R.id.bij);
 
         leesFotos();
         maakLayout();
@@ -51,6 +58,8 @@ public class Oef6_2Activity extends AppCompatActivity {
         TextView woord = (TextView) findViewById(R.id.woord);
         woord.setText(woorden.get(i));
 
+        woord.measure(0,0);
+        lengte = woord.getMeasuredWidth();
 
         ImageView image = (ImageView) findViewById(R.id.afbeelding);
         image.setImageResource(getResources().getIdentifier(fotos.get(i), "drawable", getPackageName()));
@@ -59,8 +68,17 @@ public class Oef6_2Activity extends AppCompatActivity {
     }
 
     public void speelZin() {
+        handleAnimation();
         audio = MediaPlayer.create(Oef6_2Activity.this, getResources().getIdentifier("voormeting_" + woorden.get(i), "raw", getPackageName()));
         audio.start();
+    }
+
+    public void handleAnimation(){
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(imageView, "x", lengte);
+        animatorX.setDuration(animationDuration);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(animatorX);
+        animatorSet.start();
     }
 
     public void volgendWoord(View v){
