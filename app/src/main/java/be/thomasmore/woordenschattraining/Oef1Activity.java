@@ -38,6 +38,7 @@ public class Oef1Activity extends AppCompatActivity {
     Test test;
 
     MediaPlayer ring;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

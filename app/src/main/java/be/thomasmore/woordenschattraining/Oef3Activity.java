@@ -7,28 +7,64 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class Oef3Activity extends AppCompatActivity {
 
-    List<String> woorden = Arrays.asList("duikbril", "klimtouw", "kroos", "riet");
+    private DatabaseHelper db;
+
+    List<String> woordenA = Arrays.asList("klimtouw", "kroos", "riet");
+    List<String> woordenB = Arrays.asList("val", "kompas", "steil");
+    List<String> woordenC = Arrays.asList("zwaan", "kamp", "zaklamp");
+
+    String woord = "duikbril";
+
+    List[][] mtrx = new List[][]{
+            {woordenA, woordenB, woordenC},
+            {woordenC, woordenA, woordenB},
+            {woordenB, woordenC, woordenA},
+    };
+
     List<String> goedOfFout = Arrays.asList("_goed", "_fout");
-    static Random random = new Random();
-    int randomNumber  = random.nextInt(2);
+
+    int vraag;
+
     int i = 0;
+
+    Test test;
+
     MediaPlayer ring;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef3);
 
+        db = new DatabaseHelper(this);
+
+        Bundle bundle = getIntent().getExtras();
+        test = db.getTest(bundle.getLong("testId"));
+
+        Kind kind = db.getKind(test.getKindId());
+
+        vraag = bundle.getInt("vraag");
+
+        int x = test.getConditie() - 1;
+        int y = (int) kind.getGroepId() - 1;
+
+        if (vraag != 0) {
+            woord = ((List<String>) mtrx[y][x]).get(vraag - 1);
+        }
+
+        Collections.shuffle(goedOfFout);
+
         speelUitleg();
-        speelZin();
     }
 
     public void speelUitleg() {
-        ring = MediaPlayer.create(Oef3Activity.this, getResources().getIdentifier("oef3_" + woorden.get(i), "raw", getPackageName()));
+        ring = MediaPlayer.create(Oef3Activity.this, getResources().getIdentifier("oef3_" + woord, "raw", getPackageName()));
         ring.start();
 
         ring.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -40,13 +76,13 @@ public class Oef3Activity extends AppCompatActivity {
     }
 
     public void speelZin() {
-        ring = MediaPlayer.create(Oef3Activity.this, getResources().getIdentifier("oef3_" + woorden.get(i) + goedOfFout.get(randomNumber), "raw", getPackageName()));
+        ring = MediaPlayer.create(Oef3Activity.this, getResources().getIdentifier("oef3_" + woord + goedOfFout.get(i), "raw", getPackageName()));
         ring.start();
     }
 
     public void controleerAntwoord(View v) {
-            String antwoord = v.getTag().toString();
-        String correcteAntwoord = goedOfFout.get(randomNumber);
+        String antwoord = v.getTag().toString();
+        String correcteAntwoord = goedOfFout.get(i);
         if (antwoord.equals(correcteAntwoord)){
             if (correcteAntwoord.equals("_goed")){
                 ring = MediaPlayer.create(Oef3Activity.this, getResources().getIdentifier("oef3_goed", "raw", getPackageName()));
@@ -77,18 +113,20 @@ public class Oef3Activity extends AppCompatActivity {
 
     public void volgende(){
         i++;
-        if (i == 4) {
-            startOef4();
+        if (i == 2) {
+            ring.stop();
+            Bundle bundle = new Bundle();
+            bundle.putLong("testId", test.getId());
+            bundle.putInt("vraag", vraag+1);
+            Intent intent = new Intent(this, Oef1Activity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            finish();
         }
         else {
-            randomNumber = random.nextInt(2);
             speelZin();
-        }
-    }
 
-    public void startOef4(){
-        Intent intent = new Intent(this, Oef4Activity.class);
-        startActivity(intent);
+        }
     }
 
     public void herhaalZin(View view) {
