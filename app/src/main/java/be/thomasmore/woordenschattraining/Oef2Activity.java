@@ -97,9 +97,8 @@ public class Oef2Activity extends AppCompatActivity {
         ring.stop();
         Bundle bundle = new Bundle();
         bundle.putLong("testId", test.getId());
-        bundle.putInt("vraag", vraag+1);
-        // todo geffrey: aanpassen naar oef 3
-        Intent intent = new Intent(this, Oef1Activity.class);
+        bundle.putInt("vraag", vraag);
+        Intent intent = new Intent(this, Oef3Activity.class);
         intent.putExtras(bundle);
         startActivity(intent);
         finish();
