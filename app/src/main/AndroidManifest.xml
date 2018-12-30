@@ -85,6 +85,11 @@
             android:name=".Oef6_2Activity"
             android:label="@string/title_activity_oef6_2"
             android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Oef6_3Activity"
+            android:label="@string/title_activity_oef6_3"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

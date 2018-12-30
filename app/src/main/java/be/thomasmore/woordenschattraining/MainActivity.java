@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         if (kind != null){
             Bundle bundle = new Bundle();
             bundle.putLong("id", kind.getId());
-
+          
             Intent intent = new Intent(this, ConditieActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);

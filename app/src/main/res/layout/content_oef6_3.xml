@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Oef6_3Activity"
+    tools:showIn="@layout/activity_oef6_3">
+
+    <LinearLayout
+        android:id="@+id/layout_oef6_3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/konijn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/konijn"
+            android:layout_marginTop="100dp"/>
+
+        <LinearLayout
+            android:id="@+id/layout_oef6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/woordDeel1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:onClick="herhaalZin"
+                android:textAlignment="center"
+                android:textSize="100px"/>
+            <TextView
+                android:id="@+id/koppelteken"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="-"
+                android:onClick="herhaalZin"
+                android:textAlignment="center"
+                android:textSize="100px"/>
+            <TextView
+                android:id="@+id/woordDeel2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:onClick="herhaalZin"
+                android:textAlignment="center"
+                android:textSize="100px"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/afbeelding"
+            android:layout_width="400dp"
+            android:layout_height="304dp"
+            android:onClick="volgendWoord"
+            android:src="@drawable/voormeting_duikbril" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
