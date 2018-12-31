@@ -128,11 +128,11 @@ public class Oef3Activity extends AppCompatActivity {
             Intent intent = new Intent();
             //todo geffrey: activitys goed zetten
             switch (test.getConditie()) {
-                case 1: intent = new Intent(this, Oef6_2Activity.class);
+                case 1: intent = new Intent(this, Oef6_1Activity.class);
                     break;
                 case 2: intent = new Intent(this, Oef6_2Activity.class);
                     break;
-                case 3: intent = new Intent(this, Oef6_1Activity.class);
+                case 3: intent = new Intent(this, Oef6_3Activity.class);
                     break;
             }
 
