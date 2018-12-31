@@ -232,6 +232,31 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return test;
     }
 
+    // query-methode
+    public Groep getGroep(long id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                "groep",      // tabelnaam
+                new String[] { "id", "naam"}, // kolommen
+                "id = ?",  // selectie
+                new String[] { String.valueOf(id) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        Groep groep = new Groep();
+
+        if (cursor.moveToFirst()) {
+            groep = new Groep(cursor.getLong(0),
+                    cursor.getString(1));
+        }
+        cursor.close();
+        db.close();
+        return groep;
+    }
+
     // rawQuery-methode
     public List<Kind> getKinderen() {
         List<Kind> lijst = new ArrayList<Kind>();
@@ -300,6 +325,33 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 GetestWoord getestWoord = new GetestWoord(cursor.getLong(0),
                         cursor.getLong(1), cursor.getString(2), cursor.getString(3), (cursor.getInt(4) != 0));
                 lijst.add(getestWoord);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
+
+    // rawQuery-methode
+    public List<Test> getTestenFromKind(long kindId) {
+        List<Test> lijst = new ArrayList<Test>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                "test",      // tabelnaam
+                new String[] { "id", "kindId", "conditie", "datum" }, // kolommen
+                "kindId = ?",  // selectie
+                new String[] { String.valueOf(kindId) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+        if (cursor.moveToFirst()) {
+            do {
+                Test test = new Test(cursor.getLong(0),
+                        cursor.getLong(1), cursor.getInt(2), cursor.getString(3));
+                lijst.add(test);
             } while (cursor.moveToNext());
         }
 

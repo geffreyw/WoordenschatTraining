@@ -32,11 +32,6 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".GroupActivity"
-            android:label="@string/title_activity_group"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".PreteachingActivity"
             android:label="@string/title_activity_preteaching"
             android:screenOrientation="landscape"
@@ -89,6 +84,11 @@
         <activity
             android:name=".Oef6_3Activity"
             android:label="@string/title_activity_oef6_3"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TestenKindActivity"
+            android:label="@string/title_activity_testen_kind"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
