@@ -140,8 +140,22 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void toonOverzicht(View v) {
+        if (kind != null){
+            Bundle bundle = new Bundle();
+            bundle.putLong("id", kind.getId());
+
+            Intent intent = new Intent(this, TestenKindActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            kind = null;
+        } else {
+            toon("Selecteer een kind!");
+        }
+    }
+
     private void toon(String tekst)
     {
-//        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
 }

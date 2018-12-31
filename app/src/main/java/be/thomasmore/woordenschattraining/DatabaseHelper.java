@@ -334,6 +334,33 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     // rawQuery-methode
+    public List<Test> getTestenFromKind(long kindId) {
+        List<Test> lijst = new ArrayList<Test>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                "test",      // tabelnaam
+                new String[] { "id", "kindId", "conditie", "datum" }, // kolommen
+                "kindId = ?",  // selectie
+                new String[] { String.valueOf(kindId) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+        if (cursor.moveToFirst()) {
+            do {
+                Test test = new Test(cursor.getLong(0),
+                        cursor.getLong(1), cursor.getInt(2), cursor.getString(3));
+                lijst.add(test);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lijst;
+    }
+
+    // rawQuery-methode
     public List<Test> getTesten() {
         List<Test> lijst = new ArrayList<Test>();
 
