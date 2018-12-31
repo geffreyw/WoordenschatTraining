@@ -76,9 +76,8 @@ public class Oef2Activity extends AppCompatActivity {
     }
 
     public void toonFoto() {
-        TextView woordTextView = (TextView) findViewById(R.id.woord);
-        woordTextView.setText(woord.toUpperCase());
-
+        TextView woord = (TextView) findViewById(R.id.woord);
+        woord.setText(woorden.get(i));
 
         ImageView image = (ImageView) findViewById(R.id.afbeelding);
         image.setImageResource(getResources().getIdentifier(foto, "drawable", getPackageName()));
