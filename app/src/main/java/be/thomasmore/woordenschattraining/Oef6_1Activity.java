@@ -86,7 +86,7 @@ public class Oef6_1Activity extends AppCompatActivity {
     }
 
     public void speelZin() {
-        ring = MediaPlayer.create(Oef6_1Activity.this, getResources().getIdentifier("oef6_" + woord, "raw", getPackageName()));
+        ring = MediaPlayer.create(Oef6_1Activity.this, getResources().getIdentifier("oef6_1_" + woord, "raw", getPackageName()));
         ring.start();
     }
 

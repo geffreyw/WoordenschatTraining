@@ -133,7 +133,7 @@ public class Oef6_3Activity extends AppCompatActivity {
     }
 
     public void speelUitleg() {
-        ring = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("oef6_3_uitleg", "raw", getPackageName()));
+        ring = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("oef6_3_" + woord, "raw", getPackageName()));
         ring.start();
 
         ring.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -145,7 +145,7 @@ public class Oef6_3Activity extends AppCompatActivity {
     }
 
     public void speelZin() {
-        ring = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("voormeting_" + woord, "raw", getPackageName()));
+        ring = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("oef6_3_klank_" + woord, "raw", getPackageName()));
         ring.start();
     }
 

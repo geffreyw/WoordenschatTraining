@@ -94,7 +94,19 @@ public class Oef6_2Activity extends AppCompatActivity {
         ImageView image = (ImageView) findViewById(R.id.afbeelding);
         image.setImageResource(getResources().getIdentifier(foto, "drawable", getPackageName()));
 
-        speelZin();
+        speelUitleg();
+    }
+
+    public void speelUitleg() {
+        ring = MediaPlayer.create(Oef6_2Activity.this, getResources().getIdentifier("oef6_2_" + woord, "raw", getPackageName()));
+        ring.start();
+
+        ring.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                speelZin();
+            }
+        });
     }
 
     public void speelZin() {
