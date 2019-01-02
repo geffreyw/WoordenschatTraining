@@ -1,5 +1,6 @@
 package be.thomasmore.woordenschattraining;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putLong("id", kind.getId());
 
-            Intent intent = new Intent(this, ConditieActivity.class);
+            Intent intent = new Intent(this, Oef5Activity.class);
             intent.putExtras(bundle);
             startActivity(intent);
             kind = null;

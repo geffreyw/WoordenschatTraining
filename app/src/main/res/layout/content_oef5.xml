@@ -18,38 +18,21 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="50dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
-
-            <TextView
-                android:id="@+id/woord1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="30dp"
-                android:textSize="30dp" />
 
             <ImageView
                 android:id="@+id/afbeelding1"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="200dp"
-                android:onClick="toevoegen"
-                android:tag="2" />
-
-            <TextView
-                android:id="@+id/woord2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="30dp"
-                android:textSize="30dp" />
+                android:onClick="selecteer"/>
 
             <ImageView
                 android:id="@+id/afbeelding2"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="200dp"
-                android:onClick="toevoegen"
-                android:tag="2" />
+                android:onClick="selecteer"/>
 
         </LinearLayout>
 
@@ -57,38 +40,20 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="50dp"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/woord3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="30dp"
-                android:textSize="30dp" />
+            android:orientation="vertical"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/afbeelding3"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="200dp"
-                android:onClick="toevoegen"
-                android:tag="3" />
-
-            <TextView
-                android:id="@+id/woord4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="30dp"
-                android:textSize="30dp" />
+                android:onClick="selecteer"/>
 
             <ImageView
                 android:id="@+id/afbeelding4"
-                android:layout_width="200dp"
+                android:layout_width="250dp"
                 android:layout_height="200dp"
-                android:onClick="toevoegen"
-                android:tag="4" />
+                android:onClick="selecteer"/>
 
         </LinearLayout>
 
@@ -98,20 +63,21 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/gekozenwoord1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_marginRight="30dp"
+            <ImageView
+                android:id="@+id/groen"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/custom_bordergreen"
+                android:onClick="onClickGroeneKader"
                 android:textSize="50sp" />
 
-            <TextView
-                android:id="@+id/gekozenwoord2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:layout_marginRight="30dp"
+            <ImageView
+                android:id="@+id/rood"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
+                android:background="@drawable/custom_borderred"
+                android:onClick="onClickRodeKader"
                 android:textSize="50sp" />
         </LinearLayout>
     </LinearLayout>
