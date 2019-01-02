@@ -72,13 +72,13 @@
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".Oef5Activity"
+            android:label="@string/title_activity_oef5"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".Oef6_1Activity"
             android:label="@string/title_activity_oef6"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ResultaatActivity"
-            android:label="@string/title_activity_resultaat"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -90,7 +90,12 @@
             android:name=".Oef6_3Activity"
             android:label="@string/title_activity_oef6_3"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ResultaatActivity"
+            android:label="@string/title_activity_resultaat"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
