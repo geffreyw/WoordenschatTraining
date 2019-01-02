@@ -76,7 +76,7 @@ public class Oef6_1Activity extends AppCompatActivity {
 
     public void maakLayout(){
         TextView woordTextView = (TextView) findViewById(R.id.woord);
-        woordTextView.setText(woord.toUpperCase());
+        woordTextView.setText(woord);
 
 
         ImageView image = (ImageView) findViewById(R.id.afbeelding);
