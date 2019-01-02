@@ -21,11 +21,40 @@ import java.util.List;
 
 public class Oef6_3Activity extends AppCompatActivity {
 
-    List<String> woorden = Arrays.asList("duikbril", "klimtouw", "kroos", "riet");
-    List<String> woordenLettergreep = Arrays.asList("duik - bril", "klim - touw", "kroos", "riet");
-    int i=0;
-    MediaPlayer audio;
-    List<String> fotos;
+    private DatabaseHelper db;
+
+    List<String> woordenA = Arrays.asList("klimtouw", "kroos", "riet");
+    List<String> woordenB = Arrays.asList("val", "kompas", "steil");
+    List<String> woordenC = Arrays.asList("zwaan", "kamp", "zaklamp");
+
+    String woord = "duikbril";
+
+    List[][] mtrx = new List[][]{
+            {woordenA, woordenB, woordenC},
+            {woordenC, woordenA, woordenB},
+            {woordenB, woordenC, woordenA},
+    };
+
+    int vraag;
+
+    List<String> lettergreepA = Arrays.asList("klim - touw", "kroos", "riet");
+    List<String> lettergreeB = Arrays.asList("val", "kom - pas", "steil");
+    List<String> lettergreeC = Arrays.asList("zwaan", "kamp", "zak - lamp");
+
+    List[][] lettergrepenMtrx = new List[][]{
+            {lettergreepA, lettergreeB, lettergreeC},
+            {lettergreeC, lettergreepA, lettergreeB},
+            {lettergreeB, lettergreeC, lettergreepA},
+    };
+
+    String lettergreepWoord = "duik - bril";
+
+    String foto;
+    int i = 0;
+
+    Test test;
+
+    MediaPlayer ring;
 
     private ImageView imageView;
     long animationDuration = 1000;
@@ -37,24 +66,40 @@ public class Oef6_3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_oef6_3);
         imageView = (ImageView) findViewById(R.id.konijn);
 
-        leesFotos();
+        db = new DatabaseHelper(this);
+
+        Bundle bundle = getIntent().getExtras();
+        test = db.getTest(bundle.getLong("testId"));
+
+        Kind kind = db.getKind(test.getKindId());
+
+        vraag = bundle.getInt("vraag");
+
+        int x = test.getConditie() - 1;
+        int y = (int) kind.getGroepId() - 1;
+
+        if (vraag != 0) {
+            woord = ((List<String>) mtrx[y][x]).get(vraag - 1);
+            lettergreepWoord = ((List<String>) lettergrepenMtrx[y][x]).get(vraag - 1);
+        }
+
+        leesFoto();
         speelUitleg();
     }
 
 
-    private void leesFotos() {
-        fotos = new ArrayList<String>();
+    private void leesFoto() {
+        foto = "";
 
         Field[] drawables = be.thomasmore.woordenschattraining.R.drawable.class.getFields();
         for (Field f : drawables) {
-            if (f.getName().startsWith("voormeting_"+ woorden.get(i))) {
-                fotos.add(f.getName());
-                i++;
-                if(i==4){
-                    i=0;
-                }
+            if (f.getName().startsWith("voormeting_"+ woord)) {
+                foto = f.getName();
             }
         }
+
+        ImageView image = (ImageView) findViewById(R.id.afbeelding);
+        image.setImageResource(getResources().getIdentifier(foto, "drawable", getPackageName()));
     }
 
     public void maakLayout(){
@@ -62,8 +107,8 @@ public class Oef6_3Activity extends AppCompatActivity {
         TextView woordDeel2 = (TextView) findViewById(R.id.woordDeel2);
         TextView koppelteken = (TextView) findViewById(R.id.koppelteken);
 
-        if(woordenLettergreep.get(i).contains(" ")){
-            String[] parts = woordenLettergreep.get(i).split("-");
+        if(lettergreepWoord.contains(" ")){
+            String[] parts = lettergreepWoord.split("-");
             String part1 = parts[0];
             String part2 = parts[1];
 
@@ -75,7 +120,7 @@ public class Oef6_3Activity extends AppCompatActivity {
         }
         else{
 
-            woordDeel1.setText(woordenLettergreep.get(i));
+            woordDeel1.setText(lettergreepWoord);
             woordDeel2.setText("");
             koppelteken.setText("");
             handleAnimationEnkel();
@@ -84,17 +129,14 @@ public class Oef6_3Activity extends AppCompatActivity {
         woordDeel1.measure(0,0);
         lengte = woordDeel1.getMeasuredWidth();
 
-        ImageView image = (ImageView) findViewById(R.id.afbeelding);
-        image.setImageResource(getResources().getIdentifier(fotos.get(i), "drawable", getPackageName()));
-
         speelZin();
     }
 
     public void speelUitleg() {
-        audio = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("oef6_3_uitleg", "raw", getPackageName()));
-        audio.start();
+        ring = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("oef6_3_" + woord, "raw", getPackageName()));
+        ring.start();
 
-        audio.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        ring.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 maakLayout();
@@ -103,8 +145,8 @@ public class Oef6_3Activity extends AppCompatActivity {
     }
 
     public void speelZin() {
-        audio = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("voormeting_" + woorden.get(i), "raw", getPackageName()));
-        audio.start();
+        ring = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("oef6_3_klank_" + woord, "raw", getPackageName()));
+        ring.start();
     }
 
     public void handleAnimationEnkel(){
@@ -124,21 +166,23 @@ public class Oef6_3Activity extends AppCompatActivity {
     }
 
     public void volgendWoord(View v){
-        i++;
-        if(i == 4){
-            startNameting();
+        ring.stop();
+        Bundle bundle = new Bundle();
+        bundle.putLong("testId", test.getId());
+        Intent intent;
+        if (vraag >= 3) {
+            bundle.putString("meeting", "nameting");
+            intent = new Intent(this, VoormetingActivity.class);
+        } else {
+            bundle.putInt("vraag", vraag+1);
+            intent = new Intent(this, Oef1Activity.class);
         }
-        else {
-            maakLayout();
-        }
+        intent.putExtras(bundle);
+        startActivity(intent);
+        finish();
     }
 
     public void herhaalZin(View view) {
         maakLayout();
-    }
-
-    public void startNameting(){
-        Intent intent = new Intent(this, VoormetingActivity.class);
-        startActivity(intent);
     }
 }

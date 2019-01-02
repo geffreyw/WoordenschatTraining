@@ -1,5 +1,6 @@
 package be.thomasmore.woordenschattraining;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Test {
@@ -49,5 +50,13 @@ public class Test {
 
     public void setDatum(String datum) {
         this.datum = datum;
+    }
+
+    @Override
+    public String toString () {
+        Date datumTest = new Date(datum);
+
+        SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
+        return fmtOut.format(datumTest) + " - Conditie " + conditie;
     }
 }

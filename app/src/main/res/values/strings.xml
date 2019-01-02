@@ -4,6 +4,7 @@
 
     <string name="voormetingsButton">Start test</string>
     <string name="beherenButton">Gebruikers beheren</string>
+    <string name="overzichtButton">Overzicht kind</string>
     <string name="kinderenBeherenListView">Kinderen:</string>
     <string name="inputNaam">Naam:</string>
     <string name="inputGroep">Groep:</string>
@@ -35,4 +36,5 @@
     <string name="title_activity_oef6_2">Oef6_2Activity</string>
     <string name="title_activity_oef6_3">Oef6_3Activity</string>
     <string name="title_activity_oef5">Oef5Activity</string>
+    <string name="title_activity_testen_kind">TestenKindActivity</string>
 </resources>

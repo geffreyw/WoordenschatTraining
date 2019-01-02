@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putLong("id", kind.getId());
 
-            Intent intent = new Intent(this, Oef4Activity.class);
+            Intent intent = new Intent(this, ConditieActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
             kind = null;
@@ -139,8 +140,22 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void toonOverzicht(View v) {
+        if (kind != null){
+            Bundle bundle = new Bundle();
+            bundle.putLong("id", kind.getId());
+
+            Intent intent = new Intent(this, TestenKindActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            kind = null;
+        } else {
+            toon("Selecteer een kind!");
+        }
+    }
+
     private void toon(String tekst)
     {
-//        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
 }

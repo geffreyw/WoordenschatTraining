@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GroupActivity">
+    tools:context=".TestenKindActivity">
 
-    <include layout="@layout/content_group" />
+    <include layout="@layout/content_testen_kind" />
 
 </android.support.design.widget.CoordinatorLayout>

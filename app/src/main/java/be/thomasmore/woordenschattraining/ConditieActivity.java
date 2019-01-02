@@ -45,6 +45,7 @@ public class ConditieActivity extends AppCompatActivity {
     public void toonVoormeting(long testId) {
         Bundle bundle = new Bundle();
         bundle.putLong("testId", testId);
+        bundle.putString("meeting", "voormeting");
 
         Intent intent = new Intent(this, VoormetingActivity.class);
         intent.putExtras(bundle);
