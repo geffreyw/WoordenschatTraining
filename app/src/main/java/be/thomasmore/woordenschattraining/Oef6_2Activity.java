@@ -86,7 +86,7 @@ public class Oef6_2Activity extends AppCompatActivity {
 
     public void maakLayout(){
         TextView woordTextView = (TextView) findViewById(R.id.woord);
-        woordTextView.setText(woord.toUpperCase());
+        woordTextView.setText(woord);
 
         woordTextView.measure(0,0);
         lengte = woordTextView.getMeasuredWidth();
@@ -116,7 +116,7 @@ public class Oef6_2Activity extends AppCompatActivity {
     }
 
     public void handleAnimation(){
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(imageView, "x", lengte);
+        ObjectAnimator animatorX = ObjectAnimator.ofFloat(imageView, "x", 0,lengte);
         animatorX.setDuration(animationDuration);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(animatorX);

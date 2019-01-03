@@ -32,6 +32,7 @@
             android:text="duikbril"
             android:onClick="herhaalZin"
             android:textAlignment="center"
+            android:gravity="center"
             android:textSize="100px" />
 
         <ImageView
@@ -42,4 +43,11 @@
             android:onClick="volgendWoord"/>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/kaat"
+        android:layout_width="245dp"
+        android:layout_height="226dp"
+        android:src="@drawable/kaat"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

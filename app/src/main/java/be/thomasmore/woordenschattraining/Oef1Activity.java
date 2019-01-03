@@ -77,7 +77,7 @@ public class Oef1Activity extends AppCompatActivity {
 
     public void toonFoto() {
         TextView woordTextView = (TextView) findViewById(R.id.woord);
-        woordTextView.setText(woord.toUpperCase());
+        woordTextView.setText(woord);
 
 
         ImageView image = (ImageView) findViewById(R.id.afbeelding);
