@@ -7,39 +7,103 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Oef4Activity extends AppCompatActivity {
 
-    String[][] woorden = new String[][]{
-            {"duikbril", "ogen", "zee", "zwemmen", "schrijven"},
-            {"klimtouw", "klimmen", "sterk", "turnzaal", "zwembad"},
-            {"kroos", "groen", "vijver", "lamp", "De eend"}
+    private DatabaseHelper db;
+
+    int KOLOM = 2;
+    int RIJ = 2;
+    int AANTAL = RIJ * KOLOM;
+
+    List<String> woordenA = Arrays.asList("klimtouw", "kroos", "riet");
+    List<String> woordenB = Arrays.asList("val", "kompas", "steil");
+    List<String> woordenC = Arrays.asList("zwaan", "kamp", "zaklamp");
+
+    String woord = "duikbril";
+
+    List[][] mtrx = new List[][]{
+            {woordenA, woordenB, woordenC},
+            {woordenC, woordenA, woordenB},
+            {woordenB, woordenC, woordenA},
     };
+
+    List<List<String>> woordenAvraag = Arrays.asList(
+            Arrays.asList("klimmen", "sterk", "de turnzaal", "het zwembad"),
+            Arrays.asList("groen", "in de vijver", "de lamp", "de eend"),
+            Arrays.asList("de vijver", "de eend", "het bos", "de bril")
+    );
+    List<List<String>> woordenBvraag = Arrays.asList(
+            Arrays.asList("de pijn", "naar voor", "de pleister", "de appel"),
+            Arrays.asList("wandelen", "de rugzak", "de landkaart", "het bad"),
+            Arrays.asList("de berg", "beklimmen", "de trap", "de bloem")
+    );
+    List<List<String>> woordenCvraag = Arrays.asList(
+            Arrays.asList("de vijver", "vleugels", "wit", "het boek"),
+            Arrays.asList("de tent", "kampvuur", "in de slaapzak", "de deur"),
+            Arrays.asList("het licht", "de batterij", "in het donker", "het paard")
+    );
+
+    List[][] mtrxVraagWoorden = new List[][]{
+            {woordenAvraag, woordenBvraag, woordenCvraag},
+            {woordenCvraag, woordenAvraag, woordenBvraag},
+            {woordenBvraag, woordenCvraag, woordenAvraag},
+    };
+
+    List<String> vraagWoorden = Arrays.asList("ogen", "in de zee", "zwemmen", "schrijven");
+
+    int vraag;
 
     List<String> fotos;
     int i = 0;
+
+    Test test;
+
+    MediaPlayer ring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oef4);
 
+        db = new DatabaseHelper(this);
+
+        Bundle bundle = getIntent().getExtras();
+        test = db.getTest(bundle.getLong("testId"));
+
+        Kind kind = db.getKind(test.getKindId());
+
+        vraag = bundle.getInt("vraag");
+
+        int x = test.getConditie() - 1;
+        int y = (int) kind.getGroepId() - 1;
+
+        if (vraag != 0) {
+            woord = ((List<String>) mtrx[y][x]).get(vraag - 1);
+            vraagWoorden = ((List<List<String>>) mtrxVraagWoorden[y][x]).get(vraag - 1);
+            Collections.shuffle(vraagWoorden);
+        }
+
         maakLayout();
         speelUitleg();
     }
 
     public void speelUitleg() {
-        MediaPlayer audio = MediaPlayer.create(Oef4Activity.this, getResources().getIdentifier("oef4_uitleg", "raw", getPackageName()));
-        audio.start();
+        ring = MediaPlayer.create(Oef4Activity.this, getResources().getIdentifier("oef4_uitleg", "raw", getPackageName()));
+        ring.start();
 
-        audio.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        ring.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 zegWoord();
@@ -47,40 +111,92 @@ public class Oef4Activity extends AppCompatActivity {
         });
     }
 
-    public void maakLayout(){
+    private void maakLayout() {
         TextView doelwoord = (TextView) findViewById(R.id.doelwoord);
-        doelwoord.setText(woorden[i][0]);
+        doelwoord.setText(woord);
 
-        TextView woord1 = (TextView) findViewById(R.id.woord1);
-        woord1.setText(woorden[i][1]);
+        int k = 0;
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.layout_vraagWoorden);
+        mainLayout.removeAllViews();
+        for (int i = 0; i < RIJ; i++) {
+            LinearLayout linearLayout = new LinearLayout(this);
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            linearLayout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT));
+            mainLayout.addView(linearLayout);
+            for (int j = 0; j < KOLOM; j++) {
+                TextView textView = new TextView(this);
+                ImageView imageView = new ImageView(this);
 
-        TextView woord2 = (TextView) findViewById(R.id.woord2);
-        woord2.setText(woorden[i][2]);
+                textView.setGravity(1);
+                textView.setTextSize(30);
 
-        TextView woord3 = (TextView) findViewById(R.id.woord3);
-        woord3.setText(woorden[i][3]);
+                LinearLayout.LayoutParams imageLayoutParams =
+                        new LinearLayout.LayoutParams(600, 500);
+                imageLayoutParams.leftMargin = 5;
+                imageLayoutParams.topMargin = 5;
+                imageView.setLayoutParams(imageLayoutParams);
 
-        TextView woord4 = (TextView) findViewById(R.id.woord4);
-        woord4.setText(woorden[i][4]);
+                imageView.setTag(vraagWoorden.get(k));
 
-        ImageView image1 = (ImageView) findViewById(R.id.afbeelding1);
-        image1.setImageResource(getResources().getIdentifier(("oef4_"+woorden[i][1]), "drawable", getPackageName()));
+                imageView.setImageResource(getResources().getIdentifier(("oef4_" + vraagWoorden.get(k)).replaceAll("\\s+", ""), "drawable", getPackageName()));
 
-        ImageView image2 = (ImageView) findViewById(R.id.afbeelding2);
-        image2.setImageResource(getResources().getIdentifier(("oef4_"+woorden[i][2]), "drawable", getPackageName()));
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        toevoegen((ImageView) v);
+                    }
+                });
 
-        ImageView image3 = (ImageView) findViewById(R.id.afbeelding3);
-        image3.setImageResource(getResources().getIdentifier(("oef4_"+woorden[i][3]), "drawable", getPackageName()));
+                textView.setText(vraagWoorden.get(k));
 
-        ImageView image4 = (ImageView) findViewById(R.id.afbeelding4);
-        image4.setImageResource(getResources().getIdentifier(("oef4_"+woorden[i][4]), "drawable", getPackageName()));
+                k++;
+                linearLayout.addView(textView);
+                linearLayout.addView(imageView);
+            }
+        }
     }
 
-    public void zegWoord(){
-        MediaPlayer audio = MediaPlayer.create(Oef4Activity.this, getResources().getIdentifier("voormeting_"+woorden[i][0], "raw", getPackageName()));
+    public void zegWoord() {
+        MediaPlayer audio = MediaPlayer.create(Oef4Activity.this, getResources().getIdentifier("voormeting_" + woord, "raw", getPackageName()));
         audio.start();
     }
 
-    public void toevoegen(View view) {
+    public void toevoegen(ImageView v) {
+        String antwoord = v.getTag().toString();
+        toon(antwoord);
+
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.layout_vraagWoorden);
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setLayoutParams(
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT));
+        TextView textView = new TextView(this);
+        ImageView imageView = new ImageView(this);
+
+        textView.setGravity(1);
+        textView.setTextSize(30);
+
+        LinearLayout.LayoutParams imageLayoutParams =
+                new LinearLayout.LayoutParams(400, 300);
+        imageLayoutParams.leftMargin = 5;
+        imageLayoutParams.topMargin = 5;
+        imageView.setLayoutParams(imageLayoutParams);
+
+        imageView.setTag(antwoord);
+
+        imageView.setImageResource(getResources().getIdentifier(("oef4_" + antwoord).replaceAll("\\s+", ""), "drawable", getPackageName()));
+
+        textView.setText(antwoord);
+
+        linearLayout.addView(textView);
+        linearLayout.addView(imageView);
+
+        mainLayout.addView(linearLayout);
+    }
+
+    private void toon(String tekst) {
+        Toast.makeText(getBaseContext(), tekst, Toast.LENGTH_SHORT).show();
     }
 }
