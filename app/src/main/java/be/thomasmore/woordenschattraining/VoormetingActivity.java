@@ -96,7 +96,7 @@ public class VoormetingActivity extends AppCompatActivity {
                 ImageView imageView = new ImageView(this);
 
                 LinearLayout.LayoutParams imageLayoutParams =
-                        new LinearLayout.LayoutParams(600,500);
+                        new LinearLayout.LayoutParams(400,300);
                 imageLayoutParams.leftMargin = 5;
                 imageLayoutParams.topMargin = 5;
                 imageView.setLayoutParams(imageLayoutParams);
