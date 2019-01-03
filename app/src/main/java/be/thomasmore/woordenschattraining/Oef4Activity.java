@@ -66,8 +66,6 @@ public class Oef4Activity extends AppCompatActivity {
 
     int vraag;
 
-    List<String> fotos;
-    //int i = 0;
     List<String> antwoorden = new ArrayList<String>();
 
     Test test;
@@ -245,15 +243,7 @@ public class Oef4Activity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putLong("testId", test.getId());
         bundle.putInt("vraag", vraag);
-        Intent intent = new Intent();
-        switch (test.getConditie()) {
-            case 1: intent = new Intent(Oef4Activity.this, Oef6_1Activity.class);
-                break;
-            case 2: intent = new Intent(Oef4Activity.this, Oef6_2Activity.class);
-                break;
-            case 3: intent = new Intent(Oef4Activity.this, Oef6_3Activity.class);
-                break;
-        }
+        Intent intent = new Intent(this, Oef5Activity.class);
 
         intent.putExtras(bundle);
         startActivity(intent);
