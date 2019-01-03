@@ -190,6 +190,6 @@ public class Oef6_3Activity extends AppCompatActivity {
     }
 
     public void herhaalZin(View view) {
-        maakLayout();
+        speelUitleg();
     }
 }
