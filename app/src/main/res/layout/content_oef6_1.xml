@@ -54,6 +54,7 @@
             android:layout_height="match_parent"
             android:text="test"
             android:textAlignment="center"
+            android:gravity="center"
             android:textSize="60px"/>
 
         <ImageView
@@ -62,10 +63,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/voormeting_duikbril" />
 
-
-
     </LinearLayout>
-
 
     <ImageView
         android:id="@+id/kaat"

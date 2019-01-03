@@ -25,6 +25,8 @@
             android:text="test"
             android:textAlignment="center"
             android:onClick="herhaalUitleg"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
             android:textSize="100px" />
 
         <ImageView

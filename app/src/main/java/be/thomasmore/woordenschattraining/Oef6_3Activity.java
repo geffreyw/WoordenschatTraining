@@ -57,7 +57,7 @@ public class Oef6_3Activity extends AppCompatActivity {
     MediaPlayer ring;
 
     private ImageView imageView;
-    long animationDuration = 1000;
+    long animationDuration = 1800;
     int lengte;
 
     @Override
@@ -107,6 +107,7 @@ public class Oef6_3Activity extends AppCompatActivity {
         TextView woordDeel2 = (TextView) findViewById(R.id.woordDeel2);
         TextView koppelteken = (TextView) findViewById(R.id.koppelteken);
 
+
         if(lettergreepWoord.contains(" ")){
             String[] parts = lettergreepWoord.split("-");
             String part1 = parts[0];
@@ -116,30 +117,29 @@ public class Oef6_3Activity extends AppCompatActivity {
             woordDeel2.setText(part2);
             woordDeel2.setPaintFlags(woordDeel1.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             koppelteken.setText("-");
-            handleAnimationDubbel();
         }
         else{
 
             woordDeel1.setText(lettergreepWoord);
             woordDeel2.setText("");
             koppelteken.setText("");
-            handleAnimationEnkel();
         }
         woordDeel1.setPaintFlags(woordDeel1.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         woordDeel1.measure(0,0);
         lengte = woordDeel1.getMeasuredWidth();
 
-        speelZin();
     }
 
     public void speelUitleg() {
         ring = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("oef6_3_" + woord, "raw", getPackageName()));
         ring.start();
 
+        maakLayout();
+
         ring.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                maakLayout();
+                speelZin();
             }
         });
     }
@@ -147,6 +147,13 @@ public class Oef6_3Activity extends AppCompatActivity {
     public void speelZin() {
         ring = MediaPlayer.create(Oef6_3Activity.this, getResources().getIdentifier("oef6_3_klank_" + woord, "raw", getPackageName()));
         ring.start();
+
+        if(lettergreepWoord.contains(" ")){
+            handleAnimationDubbel();
+        }
+        else{
+            handleAnimationEnkel();
+        }
     }
 
     public void handleAnimationEnkel(){

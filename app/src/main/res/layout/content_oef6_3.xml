@@ -20,9 +20,10 @@
 
         <ImageView
             android:id="@+id/konijn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/konijn"
+            android:gravity="center"
             android:layout_marginTop="100dp"/>
 
         <LinearLayout
@@ -41,6 +42,7 @@
                 android:layout_marginTop="50dp"
                 android:onClick="herhaalZin"
                 android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="100px"/>
             <TextView
                 android:id="@+id/koppelteken"
@@ -69,4 +71,10 @@
             android:src="@drawable/voormeting_duikbril" />
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/kaat"
+        android:layout_width="245dp"
+        android:layout_height="226dp"
+        android:src="@drawable/kaat"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
