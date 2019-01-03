@@ -46,7 +46,6 @@ public class ConditieActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putLong("testId", testId);
         bundle.putString("meeting", "voormeting");
-        bundle.putInt("vraag", 1);
 
         Intent intent = new Intent(this, VoormetingActivity.class);
         intent.putExtras(bundle);
