@@ -137,7 +137,7 @@ public class Oef4Activity extends AppCompatActivity {
                 textView.setTextSize(30);
 
                 LinearLayout.LayoutParams imageLayoutParams =
-                        new LinearLayout.LayoutParams(600, 500);
+                        new LinearLayout.LayoutParams(300, 200);
                 imageLayoutParams.leftMargin = 5;
                 imageLayoutParams.topMargin = 5;
                 imageView.setLayoutParams(imageLayoutParams);
@@ -180,10 +180,10 @@ public class Oef4Activity extends AppCompatActivity {
         ImageView imageView = new ImageView(this);
 
         textView.setGravity(1);
-        textView.setTextSize(30);
+        textView.setTextSize(20);
 
         LinearLayout.LayoutParams imageLayoutParams =
-                new LinearLayout.LayoutParams(400, 300);
+                new LinearLayout.LayoutParams(200, 100);
         imageLayoutParams.leftMargin = 5;
         imageLayoutParams.topMargin = 5;
         imageView.setLayoutParams(imageLayoutParams);
