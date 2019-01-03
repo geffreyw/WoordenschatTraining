@@ -20,7 +20,7 @@ public class ResultaatActivity extends AppCompatActivity {
 
     private Test test;
 
-    //todo Iemand: Mooi overzichtje maken
+    //todo Iemand: Overicht per oefening sorteren?
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
