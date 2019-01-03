@@ -126,7 +126,6 @@ public class Oef3Activity extends AppCompatActivity {
             bundle.putLong("testId", test.getId());
             bundle.putInt("vraag", vraag);
             Intent intent = new Intent();
-            //todo geffrey: activitys goed zetten
             switch (test.getConditie()) {
                 case 1: intent = new Intent(this, Oef6_1Activity.class);
                     break;
@@ -142,8 +141,14 @@ public class Oef3Activity extends AppCompatActivity {
         }
         else {
             ring.stop();
-            speelZin();
-
+            ring = MediaPlayer.create(Oef3Activity.this, getResources().getIdentifier("oef3_nogeentje", "raw", getPackageName()));
+            ring.start();
+            ring.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    speelZin();
+                }
+            });
         }
     }
 

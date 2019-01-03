@@ -9,6 +9,51 @@
     tools:showIn="@layout/activity_oef4">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/layout_vraagWoorden"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- Right side spacer -->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/doelwoord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="50sp"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--<LinearLayout
         android:id="@+id/layout_oef4"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
@@ -16,80 +61,17 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/woord1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="30dp"
-                android:textSize="30dp" />
-
-            <ImageView
-                android:id="@+id/afbeelding1"
-                android:tag="2"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:onClick="toevoegen"/>
-
-            <TextView
-                android:id="@+id/woord2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="30dp"
-                android:textSize="30dp" />
-
-            <ImageView
-                android:id="@+id/afbeelding2"
-                android:tag="2"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:onClick="toevoegen"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/layout_vraagWoorden"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="50dp"
-            android:orientation="vertical">
 
-
-            <TextView
-                android:id="@+id/woord3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="30dp"
-                android:textSize="30dp" />
-
-            <ImageView
-                android:id="@+id/afbeelding3"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:tag="3"
-                android:onClick="toevoegen"/>
-
-            <TextView
-                android:id="@+id/woord4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="30dp"
-                android:textSize="30dp" />
-
-            <ImageView
-                android:id="@+id/afbeelding4"
-                android:tag="4"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:onClick="toevoegen"/>
-
-        </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -107,35 +89,15 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_gravity="center"
+                android:id="@+id/layout_antwoorden"
                 android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
 
-                <TextView
-                    android:id="@+id/gekozenwoord1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginRight="30dp"
-                    android:textSize="50sp" />
-
-                <TextView
-                    android:id="@+id/gekozenwoord2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginRight="30dp"
-                    android:textSize="50sp" />
-
-                <TextView
-                    android:id="@+id/gekozenwoord3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginRight="30dp"
-                    android:textSize="50sp" />
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>-->
 </android.support.constraint.ConstraintLayout>
