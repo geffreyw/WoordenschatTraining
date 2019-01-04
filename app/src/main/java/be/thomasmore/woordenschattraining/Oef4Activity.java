@@ -99,15 +99,8 @@ public class Oef4Activity extends AppCompatActivity {
     }
 
     public void speelUitleg() {
-        ring = MediaPlayer.create(Oef4Activity.this, getResources().getIdentifier("oef4_uitleg", "raw", getPackageName()));
+        ring = MediaPlayer.create(Oef4Activity.this, getResources().getIdentifier("oef4_" + woord, "raw", getPackageName()));
         ring.start();
-
-        ring.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                zegWoord();
-            }
-        });
     }
 
     private void maakLayout() {
@@ -157,11 +150,6 @@ public class Oef4Activity extends AppCompatActivity {
                 linearLayout.addView(imageView);
             }
         }
-    }
-
-    public void zegWoord() {
-        MediaPlayer audio = MediaPlayer.create(Oef4Activity.this, getResources().getIdentifier("voormeting_" + woord, "raw", getPackageName()));
-        audio.start();
     }
 
     public void toevoegen(ImageView v) {
