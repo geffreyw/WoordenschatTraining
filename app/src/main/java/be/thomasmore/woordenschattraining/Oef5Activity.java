@@ -202,6 +202,7 @@ public class Oef5Activity extends AppCompatActivity {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
                     juist = 0;
+                    aantalKeren = 0;
                     maakLayout();
                 }
             });
